@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var friends = [
+        Friend(name: "Ben", description: "Works in the bakery"),
+        Friend(name: "Max", description: "School Friend"),
+        Friend(name: "Yoosuf", description: "Best Friend")
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            List(friends) { friend in
+                Text(friend.name)
+            }
+            .navigationTitle("Friends")
         }
-        .padding()
     }
 }
 
