@@ -14,12 +14,55 @@ struct ContentView: View {
         Friend(name: "Yoosuf", description: "Best Friend")
     ]
     
+    @State private var showAddSheet = false
+    
     var body: some View {
         NavigationStack {
-            List(friends) { friend in
-                Text(friend.name)
+            List{ 
+                ForEach($friends, editActions: [.all]) { $friend in
+                    NavigationLink {
+                        FriendDetailView(friend: $friend)
+                    } label: {
+                        HStack{
+                            Image(systemName: friend.picture)
+                                .foregroundColor(friend.color)
+                            
+                            VStack(alignment: .leading){
+                                Text(friend.name)
+                                    .foregroundColor(friend.color)
+                                Text(friend.description)
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                                
+                            }
+                        }
+                }
+                }
+                .onDelete { indexSet in
+                    friends.remove(atOffsets: indexSet)
+                }
+                .onMove { originalOffsets, newOffset in friends.move(fromOffsets: originalOffsets,
+                toOffset: newOffset)
+                     }
+
+                
             }
             .navigationTitle("Friends")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button{
+                        showAddSheet = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddSheet) {
+                NewFriendView(sourceArray: $friends)
+            }
         }
     }
 }

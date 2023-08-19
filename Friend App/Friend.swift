@@ -6,10 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum Social {
-    case new, old, school, work
-}
 
 struct Friend: Identifiable {
     let id = UUID()
@@ -17,5 +15,5 @@ struct Friend: Identifiable {
     var name: String
     var description: String
     var picture: String = "person.crop.circle"
-    var type : Social = .new
+    var color : Color = .blue
 }
