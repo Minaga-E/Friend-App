@@ -18,13 +18,13 @@ struct FriendDetailView: View {
             Picker("**Picture**", selection: $friend.picture) {
                 ForEach(profile, id: \.self) {
                     Image(systemName: $0)
-                        .foregroundColor(friend.color)
+                        
                 }
             }
             TextField("Name", text: $friend.name)
             TextField("Description", text: $friend.description)
                 .foregroundColor(.gray)
-            ColorPicker("Color", selection: $friend.color)
+            
         }
         .navigationTitle("Friend Details")
     }

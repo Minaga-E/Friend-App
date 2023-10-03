@@ -23,6 +23,8 @@ struct NewFriendView: View {
                 Button("Save") {
                     let friend = Friend(name: friendName, description: friendDescription)
                     sourceArray.append(friend)
+                    dismiss()
+
                 }
                 Button("Cancel", role: .destructive) {
                     dismiss()

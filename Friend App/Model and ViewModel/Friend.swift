@@ -9,11 +9,9 @@ import Foundation
 import SwiftUI
 
 
-struct Friend: Identifiable {
-    let id = UUID()
-    
+struct Friend: Identifiable, Codable {
+    var id = UUID()
     var name: String
     var description: String
     var picture: String = "person.crop.circle"
-    var color : Color = .blue
 }
