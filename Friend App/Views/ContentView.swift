@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var friendManager = FriendManager()
+    @ObservedObject var friendManager = FriendManager()
     
     @State private var showAddSheet = false
     
@@ -16,23 +16,7 @@ struct ContentView: View {
         NavigationStack {
             List{
                 ForEach($friendManager.friends, editActions: [.all]) { $friend in
-                    NavigationLink {
-                        FriendDetailView(friend: $friend)
-                    } label: {
-                        HStack{
-                            Image(systemName: friend.picture)
-                                
-                            
-                            VStack(alignment: .leading){
-                                Text(friend.name)
-                                    
-                                Text(friend.description)
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
-                                
-                            }
-                        }
-                    }
+                    FriendRowView(friend: Binding(get: {friend}, set: {friend = $0}))
                 }
                 
                 
@@ -54,6 +38,7 @@ struct ContentView: View {
                 NewFriendView(sourceArray: $friendManager.friends)
             }
         }
+
     }
 }
 

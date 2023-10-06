@@ -32,6 +32,6 @@ struct FriendDetailView: View {
 
 struct FriendDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendDetailView(friend: .constant(Friend(name: "Akala", description: "He likes Blue")))
+        FriendDetailView(friend: .constant(Friend(name: "Testing", description: "Testing")))
     }
 }

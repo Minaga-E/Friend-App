@@ -8,13 +8,32 @@
 import SwiftUI
 
 struct FriendRowView: View {
+    @Binding var friend: Friend
+
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink {
+            FriendDetailView(friend: $friend)
+        } label: {
+            HStack{
+                Image(systemName: friend.picture)
+                    
+                
+                VStack(alignment: .leading){
+                    Text(friend.name)
+                        
+                    Text(friend.description)
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                    
+                }
+            }
+        }
     }
 }
 
 struct FriendRowView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendRowView()
+        FriendRowView(friend: .constant(Friend(name: "Testing", description: "Testing")))
     }
 }
